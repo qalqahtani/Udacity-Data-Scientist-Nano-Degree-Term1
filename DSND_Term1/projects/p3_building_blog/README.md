@@ -27,7 +27,7 @@ For this project, I was interestested in using Boston Airbnb data to better unde
 
 ## File Descriptions <a name="files"></a>
 
-There are 3 files used in this analysis 2 for the dataset and 1 notebook to showcase work related to the above questions. Markdown cells were used to assist in walking through the thought process for individual steps.  
+There are 3 files used in this analysis 2 for the datasets(listings.csv, calendar.csv) and 1 notebook (Boston_Airbnb_EDA.ipynb) to showcase work related to the above questions. Markdown cells were used to assist in walking through the thought process for individual steps.  
 
 ## Results<a name="results"></a>
 
