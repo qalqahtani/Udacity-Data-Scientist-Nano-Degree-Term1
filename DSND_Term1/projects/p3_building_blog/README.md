@@ -9,7 +9,7 @@
 
 ## Installation <a name="installation"></a>
 
-All required libraries can be found on the requirments.txt file. You can simply install them using this command:
+There should be no necessary libraries to run the code here beyond the Anaconda distribution of Python and the libraries in requirments.txt file. You can simply install them using this command:
 
 ```
 pip install -r requirements.txt
