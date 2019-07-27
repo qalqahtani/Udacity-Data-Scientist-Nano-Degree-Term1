@@ -23,7 +23,7 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     """
-    Clean Data function
+    Clean Data function, takes in a dataframe clean it and return that dataframe 
     
     args:
         df: raw data Pandas DataFrame
