@@ -1,5 +1,6 @@
 import sys
 import pandas as pd 
+from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
@@ -23,7 +24,7 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     """
-    Clean Data function
+    Clean Data function, takes in a dataframe clean it and return that dataframe 
     
     args:
         df: raw data Pandas DataFrame
@@ -60,7 +61,15 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
-    pass  
+    """
+    Save Data function
+    
+    Arguments:
+        df: Clean data Pandas DataFrame
+        database_filename: database file (.db) destination path
+    """
+    engine = create_engine('sqlite:///'+ database_filename)
+    df.to_sql('df', engine, index=False)  
 
 
 def main():
