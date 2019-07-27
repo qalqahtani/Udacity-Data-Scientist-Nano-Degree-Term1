@@ -1,12 +1,62 @@
 import sys
+import pandas as pd 
 
 
 def load_data(messages_filepath, categories_filepath):
-    pass
+    """
+    Load Data function, takes in two csv files and merge them into a master dataframe.
+    
+    args:
+        messages_filepath: path to messages csv file
+        categories_filepath: path to categories csv file
+    Output:
+        df: Loaded dasa as Pandas DataFrame
+    """
+    # Load messages dataset 
+    messages = pd.read_csv(messages_filepath)
+    # Load categories dataset 
+    categories = pd.read_csv(categories_filepath)
+    # Merge both datasets into a master dataset on id column 
+    df = pd.merge([messages, categories], how='inner', on='id')
+    return df 
 
 
 def clean_data(df):
-    pass
+    """
+    Clean Data function
+    
+    args:
+        df: raw data Pandas DataFrame
+    Outputs:
+        df: clean data Pandas DataFrame
+    """
+    # Create a dataframe of the 36 individual category columns
+    categories = df.categories.str.split(pat=';',expand=True)
+
+    # Select the first row of the categories dataframe
+    firstrow = categories.iloc[0,:]
+
+    # Use this row to extract a list of new column names for categories
+    category_colnames = firstrow.apply(lambda x:x[:-2])
+
+    # Rename the columns of `categories`
+    categories.columns = category_colnames
+
+    for column in categories:
+        categories[column] = categories[column].str[-1]  # Set each value to be the last character of the string
+        categories[column] = categories[column].astype(int)  # Convert column from string to numeric
+
+    # Drop the original categories column from `df`    
+    df = df.drop('categories',axis=1)
+
+    # Concatenate the original dataframe with the new `categories` dataframe
+    df = pd.concat([df,categories],axis=1)
+
+    # Drop duplicates
+    df = df.drop_duplicates()
+
+    # Return cleaned dataframe 
+    return df
 
 
 def save_data(df, database_filename):
